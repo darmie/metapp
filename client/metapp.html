@@ -12,18 +12,20 @@
     {{/each}}
     <input id="name" placeholder="Your Name..." />
     <input id="post" placeholder="message..." />
-    <input type="button" class="inc" value="Submit" />
+    <input type="button" class="submit" value="Submit" />
+    
+    <br />
     
     {{#if selected_post}}
-    <a href="#" class="delete">delete</a> {{selected_post}}'s Post
+    <div><a href="#" class="delete">delete</a> {{selected_post}}'s Post</div>
     {{/if}}
     
     {{#unless selected_post}}
-	Select a post to delete it!
+	<div>Select a post to delete it!</div>
 	{{/unless}}
     
 </template>
 
 <template name="post">
-	<div {{#if selected}}class="{{selected}}"{{/if}}>{{name}}: {{message}}</div>
+	<div {{#if selected}}class="{{selected}}"{{/if}}>{{name}}: {{message}} @ {{dateFormat date}}</div>
 </template>
