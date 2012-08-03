@@ -27,5 +27,7 @@
 </template>
 
 <template name="post">
-	<div {{#if selected}}class="{{selected}}"{{/if}}>{{name}}: {{message}} @ {{dateFormat date}}</div>
+	<div {{#if selected}}class="{{selected}}"{{/if}}>
+	{{name}}: {{message}} @ {{dateFormat date}}
+	</div>
 </template>
