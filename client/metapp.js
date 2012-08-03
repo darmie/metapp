@@ -10,20 +10,19 @@ Template.section.events = {
 	// Call Comment Submit
 	"click input.submit": function () {
 		Meteor.call('comment',
-				$("input#name").val(),
-				$("input#post").val(),
-				(new Date()).getTime(),
-				function (error, result) {
-					if (!result) {
-						$("input#post").attr("placeholder",
-						"please type a message...");
-					}
-					else if (result && !error) {
-						$('input#name').val('');
-						$('input#post').val('');
-					}
-					
+			$("input#name").val(),
+			$("input#post").val(),
+			(new Date()).getTime(),
+			function (error, result) {
+				if (!result) {
+					$("input#post").attr("placeholder",
+					"please type a message...");
 				}
+				else if (result && !error) {
+					$('input#name').val('');
+					$('input#post').val('');
+				}
+			}
 		);
 	},
 	"click a.delete": function () {
