@@ -18,7 +18,7 @@ Template.section.events = {
 					$("input#post").attr("placeholder",
 					"please type a message...");
 				}
-				else if (result && !error) {
+				else if (!error) {
 					$('input#name').val('');
 					$('input#post').val('');
 				}
