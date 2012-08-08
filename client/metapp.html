@@ -1,32 +1,32 @@
 <head>
-	<title>My First App</title>
+  <title>My First App</title>
 </head>
 
 <body>
-	{{> section}}
+  {{> section}}
 </body>
 
 <template name="section">
-	{{#each posts}}
-	  {{> post}}
-	{{/each}}
-	<input id="name" placeholder="your name..." />
-	<input id="post" placeholder="message..." />
-	<input type="button" class="submit" value="Submit" />
+  {{#each posts}}
+    {{> post}}
+  {{/each}}
+  <input id="name" placeholder="your name..." />
+  <input id="post" placeholder="message..." />
+  <input type="button" class="submit" value="Submit" />
 
-	<br />
+  <br />
 
-	{{#if selected_post}}
-	<div><a href="#" class="delete">delete</a> {{selected_post}}'s Post</div>
-	{{/if}}
+  {{#if selected_post}}
+  <div><a href="#" class="delete">delete</a> {{selected_post}}'s Post</div>
+  {{/if}}
 
-	{{#unless selected_post}}
-	<div>Select a post to delete it!</div>
-	{{/unless}}
+  {{#unless selected_post}}
+  <div>Select a post to delete it!</div>
+  {{/unless}}
 </template>
 
 <template name="post">
-	<div {{#if selected}}class="{{selected}}"{{/if}}>
-	{{name}}: {{message}} @ {{dateFormat date}}
-	</div>
+  <div {{#if selected}}class="{{selected}}"{{/if}}>
+  {{name}}: {{message}} @ {{dateFormat date}}
+  </div>
 </template>
