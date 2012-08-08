@@ -8,19 +8,19 @@
 
 <template name="section">
 	{{#each posts}}
-      {{> post}}
-    {{/each}}
-    <input id="name" placeholder="your name..." />
-    <input id="post" placeholder="message..." />
-    <input type="button" class="submit" value="Submit" />
-    
-    <br />
-    
-    {{#if selected_post}}
-    <div><a href="#" class="delete">delete</a> {{selected_post}}'s Post</div>
-    {{/if}}
-    
-    {{#unless selected_post}}
+	  {{> post}}
+	{{/each}}
+	<input id="name" placeholder="your name..." />
+	<input id="post" placeholder="message..." />
+	<input type="button" class="submit" value="Submit" />
+
+	<br />
+
+	{{#if selected_post}}
+	<div><a href="#" class="delete">delete</a> {{selected_post}}'s Post</div>
+	{{/if}}
+
+	{{#unless selected_post}}
 	<div>Select a post to delete it!</div>
 	{{/unless}}
 </template>
