@@ -1,4 +1,6 @@
-Posts = new Meteor.Collection("posts");
+Posts = new Meteor.Collection('posts');
+
+Meteor.subscribe('allposts');
 
 // Output posts
 Template.section.posts = function () {
@@ -8,15 +10,15 @@ Template.section.posts = function () {
 // Events for Template Section
 Template.section.events = {
 	// Call Comment Submit
-	"click input.submit": function () {
+	'click input.submit': function () {
 		Meteor.call('comment',
-			$("input#name").val(),
-			$("input#post").val(),
+			$('input#name').val(),
+			$('input#post').val(),
 			(new Date()).getTime(),
 			function (error, result) {
 				if (!result) {
-					$("input#post").attr("placeholder",
-					"please type a message...");
+					$('input#post').attr('placeholder',
+					'please type a message...');
 				}
 				else if (!error) {
 					$('input#name').val('');
@@ -25,23 +27,23 @@ Template.section.events = {
 			}
 		);
 	},
-	"click a.delete": function () {
-		Posts.remove(Session.get("selected_post"));
+	'click a.delete': function () {
+		Posts.remove(Session.get('selected_post'));
 	}
 };
 
 // Get Username for selected Post
 Template.section.selected_post = function () {
-	var post = Posts.findOne(Session.get("selected_post"));
+	var post = Posts.findOne(Session.get('selected_post'));
 	return post && post.name;
 };
 
 // Select a Post
 Template.post.selected = function () {
-	return Session.equals("selected_post", this._id) ? "selected" : "";
+	return Session.equals('selected_post', this._id) ? 'selected' : '';
 };
 Template.post.events = {
-	"click": function () {
-		Session.set("selected_post", this._id);
+	'click': function () {
+		Session.set('selected_post', this._id);
 	}
 };

@@ -1,33 +1,31 @@
-// Helper: {{dateFormat}}
-Handlebars.registerHelper("dateFormat", function(timestamp) {
-	function zero(n)
-	{
-		if(n < 10) {
-			return "0" + n;
-		} else {
-			return n;
+// Helper: {{dateFormat date}}
+Handlebars.registerHelper('dateFormat', function (timestamp) {
+	function zero(n) {
+		if (n < 10) {
+			return '0' + n;
 		}
+		return n;
 	}
 	var a = new Date(timestamp);
-	var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct",
-				  "Nov","Dec"];
+	var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+				  'Oct', 'Nov', 'Dec'];
 	var year = a.getFullYear();
 	var month = months[a.getMonth()];
 	var date = a.getDate();
 	var hour = zero(a.getHours());
 	var min = zero(a.getMinutes());
 	var sec = zero(a.getSeconds());
-	var time = date + ". " + month + " " + year + " " + hour +
-			   ":" + min + ":" + sec;
+	var time = date + '. ' + month + ' ' + year + ' ' + hour +
+			   ':' + min + ':' + sec;
 	return time;
 });
 
 // Helper: {{#stripes array "even" "odd"}}
 // <div class="{{stripeClass}}">&nbsp;</div>
 // {{else}} No Content {{/stripes}}
-Handlebars.registerHelper("stripes", function(array, even, odd, fn, elseFn) {
+Handlebars.registerHelper('stripes', function (array, even, odd, fn, elseFn) {
   if (array && array.length > 0) {
-    var buffer = "";
+    var buffer = '';
     for (var i = 0, j = array.length; i < j; i++) {
       var item = array[i];
  
