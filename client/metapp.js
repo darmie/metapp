@@ -1,6 +1,6 @@
-Posts = new Meteor.Collection('posts');
-
-Meteor.subscribe('allposts');
+Meteor.startup(function () {
+  Meteor.subscribe('allposts');
+});
 
 // Output posts
 Template.section.posts = function () {
