@@ -1,6 +1,5 @@
 // Helper: {{dateFormat date}}
 Handlebars.registerHelper('dateFormat', function (timestamp) {
-  'use strict';
   function zero(n) {
     if (n < 10) {
       return '0' + n;
