@@ -7,9 +7,14 @@
 </body>
 
 <template name="section">
+  <h3 id="h-posts">Posts:</h3>
+  <div>
   {{#each posts}}
     {{> post}}
+  {{else}}
+    <div>no posts</div>
   {{/each}}
+    
   <input id="name" placeholder="your name..." />
   <input id="post" placeholder="message..." />
   <input type="button" class="submit" value="Submit" />
@@ -23,6 +28,7 @@
   {{#unless selected_post}}
   <div>Select a post to delete it!</div>
   {{/unless}}
+  </div>
 </template>
 
 <template name="post">
