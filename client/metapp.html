@@ -7,11 +7,8 @@
 </body>
 
 <template name="section">
-  {{#each news}}
-    {{> news}}
-  {{/each}}
-  
   {{#if news_session}}
+  {{> newsOne}}
   <h4 id="h-posts">comments:</h4>
   <div>
   {{#each posts}}
@@ -34,19 +31,31 @@
   <div>Select a post to delete it!</div>
   {{/unless}}
   </div>
+  {{else}}
+  {{#each news}}
+    {{> news}}
+  {{/each}}
   {{/if}}
+</template>
+
+<template name="news">
+  <h3>{{title}}</h3>
+  <div>
+  {{article}}
+  </div>
+  <hr>
+</template>
+
+<template name="newsOne">
+  <h3>{{title}}</h3>
+  <div>
+  {{article}}
+  </div>
+  <hr>
 </template>
 
 <template name="post">
   <div {{#if selected}}class="{{selected}}"{{/if}}>
   {{name}}: {{message}} @ {{dateFormat date}}
   </div>
-</template>
-
-<template name="news">
-  <h3>{{title}}</h3>
-  <div class="news">
-  {{article}}
-  </div>
-  <hr>
 </template>

@@ -1,8 +1,5 @@
 //Startup Function
 Meteor.startup(function () {
-  //Clear Sessions
-  Session.set('news_id', null);
-  
   //Suscribes
   Meteor.autosubscribe(function () {
     Meteor.subscribe('news');
@@ -17,10 +14,7 @@ Meteor.startup(function () {
 
 // Output
 Template.section.news = function () {
-  if (!Session.get('news_id')) {
-    return News.find();
-  }
-  return News.find(Session.get('news_id'));
+  return News.find();
 };
 Template.section.posts = function () {
   return Posts.find();
@@ -28,7 +22,14 @@ Template.section.posts = function () {
 Template.section.news_session = function () {
   return Session.get('news_id');
 };
-
+Template.newsOne.title = function () {
+  var title = News.findOne(Session.get('news_id'));
+  return title && title.title;
+};
+Template.newsOne.article = function () {
+  var article = News.findOne(Session.get('news_id'));
+  return article && article.article;
+};
 
 // Events for Template Section
 Template.section.events = {
