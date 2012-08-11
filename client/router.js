@@ -1,16 +1,16 @@
 var MetaAppRouter = Backbone.Router.extend({
   routes: {
-    "": "main"
+    "": "index",
     "news/:news_id": "news"
   },
-  main: function () {
-    Session.set("index", "index");
+  index: function () {
+    Session.set('news_id', null);
   },
   news: function (news_id) {
     Session.set("news_id", news_id);
   },
   setNews: function (news_id) {
-    this.navigate("news/"+news_id, true);
+    this.navigate("news/" + news_id, true);
   }
 });
 

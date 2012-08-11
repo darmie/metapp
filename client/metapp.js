@@ -4,13 +4,8 @@ Meteor.startup(function () {
   Session.set('news_id', null);
   
   //Suscribes
-  Meteor.subscribe('news', function () {
-    if (!Session.get('news_id')) {
-      var news = News.findOne();
-      if (news) {
-        Router.setNews(news._id);
-      }
-    }
+  Meteor.autosubscribe(function () {
+    Meteor.subscribe('news');
   });
   Meteor.autosubscribe(function () {
     var news_id = Session.get('news_id');
@@ -22,11 +17,18 @@ Meteor.startup(function () {
 
 // Output
 Template.section.news = function () {
-  return News.find();
+  if (!Session.get('news_id')) {
+    return News.find();
+  }
+  return News.find(Session.get('news_id'));
 };
 Template.section.posts = function () {
   return Posts.find();
 };
+Template.section.news_session = function () {
+  return Session.get('news_id');
+};
+
 
 // Events for Template Section
 Template.section.events = {
@@ -68,5 +70,12 @@ Template.post.selected = function () {
 Template.post.events = {
   'click': function () {
     Session.set('selected_post', this._id);
+  }
+};
+
+//Open News
+Template.news.events = {
+  'click': function () {
+    Router.setNews(this._id);
   }
 };

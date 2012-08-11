@@ -11,6 +11,7 @@
     {{> news}}
   {{/each}}
   
+  {{#if news_session}}
   <h4 id="h-posts">Posts:</h4>
   <div>
   {{#each posts}}
@@ -33,6 +34,7 @@
   <div>Select a post to delete it!</div>
   {{/unless}}
   </div>
+  {{/if}}
 </template>
 
 <template name="post">
@@ -42,9 +44,8 @@
 </template>
 
 <template name="news">
-  <hr>
   <h3>{{title}}</h3>
-  <div>
+  <div class="news">
   {{article}}
   </div>
   <hr>
