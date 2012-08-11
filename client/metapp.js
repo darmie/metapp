@@ -1,8 +1,29 @@
+//Startup Function
 Meteor.startup(function () {
-  Meteor.subscribe('allposts');
+  //Clear Sessions
+  Session.set('news_id', null);
+  
+  //Suscribes
+  Meteor.subscribe('news', function () {
+    if (!Session.get('news_id')) {
+      var news = News.findOne();
+      if (news) {
+        Router.setNews(news._id);
+      }
+    }
+  });
+  Meteor.autosubscribe(function () {
+    var news_id = Session.get('news_id');
+    if (news_id) {
+      Meteor.subscribe('allposts', Session.get('news_id'));
+    }
+  });
 });
 
-// Output posts
+// Output
+Template.section.news = function () {
+  return News.find();
+};
 Template.section.posts = function () {
   return Posts.find();
 };
@@ -14,7 +35,7 @@ Template.section.events = {
     Meteor.call('comment',
       $('input#name').val(),
       $('input#post').val(),
-      (new Date()).getTime(),
+      Session.get('news_id'),
       function (error, result) {
         if (!result) {
           $('input#post').attr('placeholder', 'please type a message...');
@@ -29,8 +50,8 @@ Template.section.events = {
     Posts.remove(Session.get('selected_post'));
   },
   // jQuery Slide :)
-  'click h3#h-posts': function () {
-    $('h3#h-posts').next().slideToggle();
+  'click h4#h-posts': function () {
+    $('h4#h-posts').next().slideToggle();
   }
 };
 
