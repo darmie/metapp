@@ -23,12 +23,12 @@ Template.section.news_session = function () {
   return Session.get('news_id');
 };
 Template.newsOne.title = function () {
-  var title = News.findOne(Session.get('news_id'));
-  return title && title.title;
+  var a = News.findOne(Session.get('news_id'));
+  return a && a.title;
 };
 Template.newsOne.article = function () {
-  var article = News.findOne(Session.get('news_id'));
-  return article && article.article;
+  var a = News.findOne(Session.get('news_id'));
+  return a && a.article;
 };
 
 // Events for Template Section
