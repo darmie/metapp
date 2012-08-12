@@ -5,7 +5,7 @@ Meteor.methods({
         name = 'Anonymous';
       }
       var date = (new Date()).getTime();
-      Posts.insert({name: name, message: message, date: date, news_id: news_id});
+      Comments.insert({name: name, message: message, date: date, news_id: news_id});
       return true;
     }
     return false;

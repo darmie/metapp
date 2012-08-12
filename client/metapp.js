@@ -7,7 +7,7 @@ Meteor.startup(function () {
   Meteor.autosubscribe(function () {
     var news_id = Session.get('news_id');
     if (news_id) {
-      Meteor.subscribe('allposts', Session.get('news_id'));
+      Meteor.subscribe('comments', Session.get('news_id'));
     }
   });
 });
@@ -16,11 +16,8 @@ Meteor.startup(function () {
 Template.section.news = function () {
   return News.find();
 };
-Template.section.posts = function () {
-  return Posts.find();
-};
-Template.section.news_session = function () {
-  return Session.get('news_id');
+Template.section.comments = function () {
+  return Comments.find();
 };
 Template.newsOne.title = function () {
   var a = News.findOne(Session.get('news_id'));
@@ -32,51 +29,58 @@ Template.newsOne.article = function () {
 };
 
 // Events for Template Section
-Template.section.events = {
+Template.comment_header.events = {
+  // jQuery Slide :)
+  'click h4#h-comments': function () {
+    $('h4#h-comments').next().slideToggle();
+  }
+};
+Template.comment_footer.events = {
   // Call Comment Submit
   'click input.submit': function () {
     Meteor.call('comment',
       $('input#name').val(),
-      $('input#post').val(),
+      $('input#comment').val(),
       Session.get('news_id'),
       function (error, result) {
         if (!result) {
-          $('input#post').attr('placeholder', 'please type a message...');
+          $('input#comment').attr('placeholder', 'please type a message...');
         } else if (!error) {
           $('input#name').val('');
-          $('input#post').val('');
-          $('input#post').attr('placeholder', 'message...');
+          $('input#comment').val('');
+          $('input#comment').attr('placeholder', 'message...');
         }
       });
   },
   'click a.delete': function () {
-    Posts.remove(Session.get('selected_post'));
-  },
-  // jQuery Slide :)
-  'click h4#h-posts': function () {
-    $('h4#h-posts').next().slideToggle();
+    Comments.remove(Session.get('selected_comment'));
   }
 };
 
 // Get Username for selected Post
-Template.section.selected_post = function () {
-  var post = Posts.findOne(Session.get('selected_post'));
-  return post && post.name;
+Template.comment_footer.selected_comment = function () {
+  var comment = Comments.findOne(Session.get('selected_comment'));
+  return comment && comment.name;
 };
 
 // Select a Post
-Template.post.selected = function () {
-  return Session.equals('selected_post', this._id) ? 'selected' : '';
+Template.comment.selected = function () {
+  return Session.equals('selected_comment', this._id) ? 'selected' : '';
 };
-Template.post.events = {
+Template.comment.events = {
   'click': function () {
-    Session.set('selected_post', this._id);
+    Session.set('selected_comment', this._id);
   }
 };
 
-//Open News
+// Open News
 Template.news.events = {
   'click': function () {
     Router.setNews(this._id);
   }
+};
+
+// Session SET
+Template.section.news_session = function () {
+  return Session.get('news_id');
 };

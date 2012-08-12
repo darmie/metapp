@@ -8,33 +8,20 @@
 
 <template name="section">
   {{#if news_session}}
-  {{> newsOne}}
-  <h4 id="h-posts">comments:</h4>
-  <div>
-  {{#each posts}}
-    {{> post}}
+    {{> newsOne}}
+    {{> comment_header}}
+    <div>
+    {{#each comments}}
+      {{> comment}}
+    {{else}}
+      <div>no posts</div>
+    {{/each}}
+    {{> comment_footer}}
+    </div>
   {{else}}
-    <div>no posts</div>
-  {{/each}}
-    
-  <input id="name" placeholder="your name..." />
-  <input id="post" placeholder="message..." />
-  <input type="button" class="submit" value="Submit" />
-
-  <br />
-
-  {{#if selected_post}}
-  <div><a href="#" class="delete">delete</a> {{selected_post}}'s Post</div>
-  {{/if}}
-
-  {{#unless selected_post}}
-  <div>Select a post to delete it!</div>
-  {{/unless}}
-  </div>
-  {{else}}
-  {{#each news}}
-    {{> news}}
-  {{/each}}
+    {{#each news}}
+      {{> news}}
+    {{/each}}
   {{/if}}
 </template>
 
@@ -47,6 +34,7 @@
 </template>
 
 <template name="newsOne">
+  <hr>
   <h3>{{title}}</h3>
   <div>
   {{article}}
@@ -54,8 +42,28 @@
   <hr>
 </template>
 
-<template name="post">
+<template name="comment_header">
+  <h4 id="h-comments">comments:</h4>
+</template>
+
+<template name="comment">
   <div {{#if selected}}class="{{selected}}"{{/if}}>
   {{name}}: {{message}} @ {{dateFormat date}}
   </div>
+</template>
+
+<template name="comment_footer">
+  <input id="name" placeholder="your name..." />
+  <input id="comment" placeholder="message..." />
+  <input type="button" class="submit" value="Submit" />
+
+  <br />
+
+  {{#if selected_comment}}
+  <div><a href="#" class="delete">delete</a> {{selected_comment}}'s Post</div>
+  {{/if}}
+
+  {{#unless selected_comment}}
+  <div>Select a post to delete it!</div>
+  {{/unless}}
 </template>
