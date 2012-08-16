@@ -7,6 +7,7 @@
 </body>
 
 <template name="section">
+  <div id="main-box">
   {{#if news_session}}
     {{> newsOne}}
     {{> comment_header}}
@@ -23,6 +24,7 @@
       {{> news}}
     {{/each}}
   {{/if}}
+  </div>
 </template>
 
 <template name="news">
