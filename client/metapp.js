@@ -1,11 +1,9 @@
 //Suscribes
-Meteor.autosubscribe(function () {
-  Meteor.subscribe('news');
-});
+Meteor.subscribe('news');
 Meteor.autosubscribe(function () {
   var news_id = Session.get('news_id');
   if (news_id) {
-    Meteor.subscribe('comments', Session.get('news_id'));
+    Meteor.subscribe('comments', news_id);
   }
 });
 
