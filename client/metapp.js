@@ -70,7 +70,7 @@ Template.comment.events = {
 
 // Open News
 Template.news.events = {
-  'click': function () {
+  'click h3.pointer': function () {
     Router.setNews(this._id);
   }
 };
